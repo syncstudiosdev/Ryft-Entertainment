@@ -4,9 +4,10 @@ const CDN = "https://cdn.discordapp.com";
 module.exports = async (req, res) => {
   const id = String(req.query.id || "");
   if (!/^\d{15,22}$/.test(id)) return res.status(400).json({ error: "bad id" });
+  if (!process.env.DISCORD_BOT_TOKEN) return res.status(503).json({ error: "Discord profile API is not configured (missing DISCORD_BOT_TOKEN)" });
   try {
     const r = await fetch(`https://discord.com/api/v10/users/${id}`, { headers: { Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}` } });
-    if (!r.ok) return res.status(r.status).json({ error: "discord " + r.status });
+    if (!r.ok) return res.status(r.status).json({ error: `Discord API request failed (HTTP ${r.status})` });
     const u = await r.json();
     const avatar = u.avatar
       ? `${CDN}/avatars/${id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`
@@ -21,5 +22,8 @@ module.exports = async (req, res) => {
       decoration: u.avatar_decoration_data ? `${CDN}/avatar-decoration-presets/${u.avatar_decoration_data.asset}.png?size=240&passthrough=true` : null,
       nameplate: np ? { palette: np.palette, label: np.label, video: `${CDN}/assets/collectibles/${np.asset}asset.webm`, image: `${CDN}/assets/collectibles/${np.asset}static.png` } : null
     });
-  } catch (e) { res.status(500).json({ error: "failed" }); }
+  } catch (e) {
+    console.error("Discord profile lookup failed:", e);
+    res.status(500).json({ error: "Discord profile lookup failed unexpectedly" });
+  }
 };

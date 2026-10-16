@@ -93,8 +93,13 @@
     $$(".member[data-id]").forEach(async el => {
       const id = el.dataset.id; if (!id) { el.classList.remove("skeleton"); return; }
       try {
-        const u = await (await fetch(`/api/discord-user?id=${encodeURIComponent(id)}`)).json();
-        if (u.error) throw 0;
+        const profileUrl = new URL("api/discord-user", document.baseURI);
+        profileUrl.searchParams.set("id", id);
+        const response = await fetch(profileUrl);
+        let u;
+        try { u = await response.json(); }
+        catch { throw new Error(`Profile API returned an invalid response (HTTP ${response.status})`); }
+        if (!response.ok || u.error) throw new Error(u.error || `Profile API returned HTTP ${response.status}`);
         el.classList.remove("skeleton");
         $(".av", el).src = u.avatar;
         $("h3", el).textContent = u.displayName;
@@ -106,7 +111,12 @@
           plate.innerHTML = `<video autoplay loop muted playsinline poster="${esc(u.nameplate.image)}" src="${esc(u.nameplate.video)}"></video>`;
           $("video", plate).onerror = () => { plate.innerHTML = `<img alt="" src="${esc(u.nameplate.image)}" onerror="this.remove()">`; };
         }
-      } catch { el.classList.remove("skeleton"); $("h3", el).textContent = "Profile unavailable"; $(".handle", el).textContent = "Check Discord ID / API setup"; }
+      } catch (error) {
+        console.error(`Unable to load Discord profile ${id}:`, error);
+        el.classList.remove("skeleton");
+        $("h3", el).textContent = "Profile unavailable";
+        $(".handle", el).textContent = error.message || "Discord profile request failed";
+      }
     });
   }
 

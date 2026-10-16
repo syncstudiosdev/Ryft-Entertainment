@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Ryft Entertainment</title>
+<meta name="description" content="Contact Ryft Entertainment.">
+<meta name="theme-color" content="#06050c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="contact">
+<div id="site-header"></div>
+<main>
+<div class="page-head wrap"><div class="eyebrow">Contact</div><h1 class="reveal">Let's <span class="grad-text">talk.</span></h1><p class="lead reveal">Partnerships, press, questions or just saying hi — pick whatever's easiest.</p></div>
+<section style="padding-top:50px">
+  <div class="wrap contact-grid">
+    <div class="discord-card reveal">
+      <div class="ic" style="font-size:2rem">💬</div>
+      <h3>Join our Discord</h3>
+      <p>The fastest way to reach us, meet the community and see what we're working on.</p>
+      <a class="btn btn-discord" data-discord href="#">Join the server ↗</a>
+    </div>
+    <form class="form reveal" data-type="contact" style="--d:.1s" novalidate>
+      <h3>Send an inquiry</h3><p class="hint">We'll reply as soon as we can.</p>
+      <div class="row">
+        <div class="field"><label>Name</label><input name="name" required maxlength="80" placeholder="Your name"></div>
+        <div class="field"><label>Discord username</label><input name="discord" maxlength="40" placeholder="username (optional)"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Email</label><input name="email" type="email" maxlength="120" placeholder="you@email.com"></div>
+        <div class="field"><label>Topic</label><select name="topic"><option>General question</option><option>Business / partnership</option><option>Press / media</option><option>Support</option><option>Other</option></select></div>
+      </div>
+      <div class="field"><label>Message</label><textarea name="message" required maxlength="1800" placeholder="How can we help?"></textarea></div>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off">
+      <button class="btn btn-primary" type="submit">Send inquiry →</button>
+      <div class="msg"></div>
+    </form>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers — Ryft Entertainment</title>
+<meta name="description" content="Join Ryft Entertainment.">
+<meta name="theme-color" content="#06050c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="careers">
+<div id="site-header"></div>
+<main>
+<div class="page-head wrap"><div class="eyebrow">Careers</div><h1 class="reveal">Help us <span class="grad-text">open the rift.</span></h1><p class="lead reveal">Find a role below, or send a general application — we always read them.</p></div>
+
+<section style="padding-top:50px">
+  <div class="wrap">
+    <div class="roles">
+
+      <!-- ===================== ROLE CARD TEMPLATE =====================
+           COPY from <article ...> to </article> for each new role.
+           Change data-role (the role name) and data-status ("open" or "closed").
+           Change the <h3>, the <p> description, and optionally the icon image. -->
+      <article class="card tilt role-card reveal" data-role="Example Role" data-status="open">
+        <div class="role-top">
+          <div class="role-icon"><img src="assets/img/icon.png" alt="" onerror="this.replaceWith('🎮')"></div>
+          <span class="status"></span>
+        </div>
+        <h3>Example Role</h3>
+        <p>Short description of what this person will do. Replace me.</p>
+        <button class="btn btn-primary apply" type="button">Apply →</button>
+      </article>
+      <!-- =================== END ROLE CARD TEMPLATE =================== -->
+
+      <article class="card tilt role-card reveal" data-role="Another Role" data-status="closed" style="--d:.1s">
+        <div class="role-top">
+          <div class="role-icon"><img src="assets/img/icon.png" alt="" onerror="this.replaceWith('🎮')"></div>
+          <span class="status"></span>
+        </div>
+        <h3>Another Role</h3>
+        <p>This one is marked closed, so it appears greyed out with no Apply button.</p>
+        <button class="btn btn-primary apply" type="button">Apply →</button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="apply" style="padding-top:20px">
+  <div class="wrap" style="max-width:760px">
+    <form class="form reveal" data-type="application" novalidate>
+      <h3>Apply to Ryft</h3><p class="hint">Your application goes straight to our team on Discord.</p>
+      <div class="row">
+        <div class="field"><label>Name</label><input name="name" required maxlength="80" placeholder="Your name"></div>
+        <div class="field"><label>Discord username</label><input name="discord" required maxlength="40" placeholder="username"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Email</label><input name="email" type="email" maxlength="120" placeholder="you@email.com"></div>
+        <div class="field"><label>Role</label><select name="role" id="role-select"><option>General application</option></select></div>
+      </div>
+      <div class="field"><label>Portfolio / links</label><input name="portfolio" maxlength="300" placeholder="https://…"></div>
+      <div class="field"><label>Tell us about yourself</label><textarea name="message" required maxlength="1500" placeholder="Experience, what you'd bring, why Ryft…"></textarea></div>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off">
+      <button class="btn btn-primary" type="submit">Send application →</button>
+      <div class="msg"></div>
+    </form>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

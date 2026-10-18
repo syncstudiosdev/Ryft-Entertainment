@@ -37,14 +37,18 @@ window.RYFT = {
   /* ---------- TEAM ----------
      Paste each person's Discord USER ID in `id`.
      (Discord > Settings > Advanced > Developer Mode ON, then right-click profile > Copy User ID)
-     Don't have a COO? Just delete that line. Add as many directors as you want. */
+     Add a portfolio URL in `portfolio`; leave it blank or remove it to hide the portfolio link.
+     Add as many executives as you want. */
   team: [
     { group: "Leadership", members: [
-      { id: "1270007167541575854", role: "Chief Executive Officer" },
+      { id: "1270007167541575854", role: "Chief Executive Officer", portfolio: "" },
     ]},
-    { group: "Directors", members: [
-      { id: "", role: "Director" },
-      { id: "", role: "Director" }
+    { group: "Executives", members: [
+      { id: "1117674442496159808", role: "Chief Management Officer", portfolio: "https://rize67.carrd.co/" },
+      { id: "776776698104381440", role: "Chief Strategy Officer", portfolio: "https://amro1.netlify.app/" },
+      { id: "1407208361560113162", role: "Chief Production Officer", portfolio: "https://tiredportfolioo.netlify.app/" },
+      { id: "958354953301274694", role: "Chief Creative Officer", portfolio: "https://notrical.carrd.co/" },
+
     ]}
   ]
 };

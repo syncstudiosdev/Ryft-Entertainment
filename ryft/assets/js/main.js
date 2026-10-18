@@ -82,13 +82,26 @@
   if (teamRoot) {
     const PAL = { crimson: "#a8243b", berry: "#9b2a7a", sky: "#2b8fd6", teal: "#1f9c93", forest: "#2c7a45", bubble_gum: "#e86fb0", violet: "#7b4fd8", cobalt: "#2f4fd0", clover: "#4aa04a" };
     const CDN = "https://cdn.discordapp.com";
+    const portfolioLink = value => {
+      if (!value) return "";
+      try {
+        const url = new URL(value);
+        if (url.protocol !== "https:" && url.protocol !== "http:") throw new Error("Portfolio URL must use HTTP or HTTPS");
+        return `<a class="portfolio-link" href="${esc(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="View portfolio" title="View portfolio">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7m-1-6-9 9"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+        </a>`;
+      } catch (error) {
+        console.error("Invalid portfolio URL in team config:", value, error);
+        return "";
+      }
+    };
     const card = (m, i) => `<article class="member tilt reveal skeleton ${m.id ? "" : "empty"}" style="--d:${i * .08}s" data-id="${esc(m.id)}">
       <div class="plate"></div><div class="shade"></div>
       <div class="mem-body"><div class="av-wrap"><img class="av" alt=""></div>
         <div><h3>${m.id ? "Loading…" : "Your Name Here"}</h3><div class="handle">${m.id ? "" : "Add a Discord ID in config.js"}</div><span class="pill">${esc(m.role)}</span></div>
-      </div></article>`;
+      </div>${portfolioLink(m.portfolio)}</article>`;
     let n = 0;
-    teamRoot.innerHTML = C.team.map(g => `<div class="group-title reveal">${esc(g.group)}</div><div class="members">${g.members.map(m => card(m, n++)).join("")}</div>`).join("");
+    teamRoot.innerHTML = C.team.map(g => `<div class="group-title reveal">${esc(g.group)}</div><div class="members${g.group === "Leadership" ? " leadership" : g.group === "Executives" ? " executives" : ""}">${g.members.map(m => card(m, n++)).join("")}</div>`).join("");
     watch();
     $$(".member[data-id]").forEach(async el => {
       const id = el.dataset.id; if (!id) { el.classList.remove("skeleton"); return; }
